@@ -4,11 +4,11 @@
 #include <regex>
 #include <stdexcept>
 
-struct NtaUpgrade {
+struct NtaDownload {
     const char* _repo;
     std::string location;
 
-    NtaUpgrade() {
+    NtaDownload() {
         _repo = "https://raw.githubusercontent.com/l1nux-th1ngz/nta/main/";
         location = findNta();
     }
@@ -54,10 +54,10 @@ struct NtaUpgrade {
 };
 
 int main() {
-    std::cout << "Nta Upgrader" << std::endl;
-    NtaUpgrade ntaUpgrade;
+    std::cout << "Nta Downloader" << std::endl;
+    NtaDownload ntaDownload;
 
-    if (ntaUpgrade.downloadLatestVersion()) {
+    if (ntaDownload.downloadLatestVersion()) {
         // Additional code for the rest of your script goes here.
     } else {
         std::cerr << "Download failed." << std::endl;
