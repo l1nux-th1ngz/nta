@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# NtaUpgrade script in Bash
+# inst.sh
 
 # Set variables
 _repo="https://raw.githubusercontent.com/l1nux-th1ngz/nta/main/"
 
-downloadLatestVersion() {
-    echo "Downloading the latest version of Nta..."
-    latestVersionURL="${_repo}nta.py"
-    curl -O "$latestVersionURL"
+downloadNtaCpp() {
+    echo "Downloading the latest version of nta.cpp..."
+    ntaCppURL="${_repo}nta.cpp"
+    curl -O "$ntaCppURL"
 
     if [ $? -eq 0 ]; then
         echo "Download complete."
@@ -19,8 +19,8 @@ downloadLatestVersion() {
 }
 
 main() {
-    echo "Nta Upgrader"
-    downloadLatestVersion
+    echo "inst.sh"
+    downloadNtaCpp
 
     # Additional code for the rest of your script goes here.
 }
