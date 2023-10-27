@@ -4,6 +4,7 @@
 import shutil
 import subprocess
 import os
+import urllib.request
 
 # Local imports
 import share
@@ -24,8 +25,8 @@ class NtaUpgrade():
 
     def __init__(self):
         # Set folder locations
-        self._repo = 'https://gitlab.com/quidsup/nta.git'
-        self._git_download = 'https://gitlab.com/quidsup/nta/-/archive/master/nta-master.zip'
+        self._repo = 'https://raw.githubusercontent.com/l1nux-th1ngz/nta/main/'
+        self._git_download = 'https://github.com/l1nux-th1ngz/nta/archive/master.zip'
 
         self._webowner = share.get_owner(folders.webdir)
 
@@ -82,6 +83,23 @@ class NtaUpgrade():
         """
         logger.info('Deleting upgrade notification')
         share.delete(f'{folders.webconfigdir}/latestversion.php')
+
+    def __download_latest_version(self):
+        """
+        Download the latest version from the provided URL
+        """
+        logger.info('Downloading the latest version of Nta...')
+        try:
+            latest_version_url = self._repo + 'nta.py'
+            response = urllib.request.urlopen(latest_version_url)
+            latest_version_content = response.read()
+            latest_version_path = os.path.join(self.location, 'nta.py')
+
+            with open(latest_version_path, 'wb') as latest_version_file:
+                latest_version_file.write(latest_version_content)
+
+        except Exception as e:
+            logger.error(f'Failed to download the latest version: {str(e)}')
 
     # The rest of the class methods remain the same
 
